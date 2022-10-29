@@ -3,7 +3,7 @@ name: Dash Automation
 on: repository_dispatch
 
 jobs:
-  ping-pong:
+  respond-to-main:
     runs-on: ubuntu-latest
     steps:
       - name: Response to Dash Main
