@@ -1,0 +1,19 @@
+{
+  "name": "dash-automation",
+  "version": "1.0.0",
+  "description": "This is a secondary repository used for running a workflow when `dash-main` trigger it.",
+  "main": "index.js",
+  "scripts": {
+    "test:browserstack": "echo \"Hi there! Trying to run a yarn script\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/floreacosta/dash-automation.git"
+  },
+  "author": "Florencia Acosta",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/floreacosta/dash-automation/issues"
+  },
+  "homepage": "https://github.com/floreacosta/dash-automation#readme"
+}
