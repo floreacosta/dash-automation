@@ -27,8 +27,9 @@ jobs:
         uses: browserstack/github-actions/setup-local@master
         with:
           local-testing: stop
+      
       - name: PONG - Dispatch response to received PING
-        if: github.event.action == 'start e2e'
+        if: github.event.action == 'ping'
         run: |
           curl -X POST https://api.github.com/repos/floreacosta/dash-main/dispatches \
           -H "Accept: application/vnd.github+json" \
