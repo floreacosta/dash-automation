@@ -28,9 +28,9 @@ jobs:
         with:
           local-testing: stop
       - name: PONG - Dispatch response to received PING
-        if: github.event.action == 'ping'
+        if: github.event.action == 'start e2e'
         run: |
           curl -X POST https://api.github.com/repos/floreacosta/dash-main/dispatches \
-          -H 'Accept: application/vnd.github.everest-preview+json' \
+          -H "Accept: application/vnd.github+json" \
           -u ${{ secrets.ACCESS_TOKEN }} \
-          --data '{"event_type": "pong", "client_payload": { "repository": "'"$GITHUB_REPOSITORY"'" }}'
+          -d '{"event_type": "pong", "client_payload": { "repository": "${{ github.repository }}" }}'
