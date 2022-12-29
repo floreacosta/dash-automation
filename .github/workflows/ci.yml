@@ -26,7 +26,6 @@ jobs:
       - name: 'Running test on BrowserStack'  # Invokes the actual test script that would run on BrowserStack browsers
         run: |
           echo "Should run yarn test:browserstack in the real repo"
-          yarn test:automation
 
       - name: 'BrowserStackLocal Stop'  # Terminating the BrowserStackLocal tunnel connection
         uses: browserstack/github-actions/setup-local@master
