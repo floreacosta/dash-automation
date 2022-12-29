@@ -6,32 +6,37 @@ jobs:
   respond-to-main:
     runs-on: ubuntu-latest
     steps:
-      - name: Response to Dash Main
+      - name: Starting to run E2E
         run: |
           echo "Event '${{ github.event.action }}' received from '${{ github.event.client_payload.repository }}'"
           echo "We will initiate the next step (should run the e2e suite)"
+
       - name: 'BrowserStack Env Setup'  # Invokes the setup-env action
         uses: browserstack/github-actions/setup-env@master
         with:
           username: ${{ secrets.BROWSERSTACK_USERNAME }}
           access-key: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
+
       - name: 'BrowserStack Local Tunnel Setup'  # Invokes the setup-local action
         uses: browserstack/github-actions/setup-local@master
         with:
           local-testing: start
           local-identifier: random
+
       - name: 'Running test on BrowserStack'  # Invokes the actual test script that would run on BrowserStack browsers
         run: |
-          echo "Should run yarn test:browserstack in the real repo"
+          echo "Should run yarn test:browserstack in the real repo" \
+          yarn test:automation
+
       - name: 'BrowserStackLocal Stop'  # Terminating the BrowserStackLocal tunnel connection
         uses: browserstack/github-actions/setup-local@master
         with:
           local-testing: stop
       
-      - name: PONG - Dispatch response to received PING
-        if: github.event.action == 'ping'
+      - name: Finishing the process - Response to dash-main
+        if: github.event.action == 'start e2e'
         run: |
           curl -X POST https://api.github.com/repos/floreacosta/dash-main/dispatches \
           -H "Accept: application/vnd.github+json" \
           -u ${{ secrets.ACCESS_TOKEN }} \
-          -d '{"event_type": "pong", "client_payload": { "repository": "${{ github.repository }}" }}'
+          -d '{"event_type": "end e2e", "client_payload": { "repository": "${{ github.repository }}" }}'
