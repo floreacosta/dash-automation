@@ -33,9 +33,8 @@ jobs:
           local-testing: stop
       
       - name: Finishing the process - Response to dash-main
-        if: github.event.action == 'start e2e'
         run: |
           curl -X POST https://api.github.com/repos/floreacosta/dash-main/dispatches \
           -H "Accept: application/vnd.github+json" \
           -u ${{ secrets.ACCESS_TOKEN }} \
-          -d '{"event_type": "end e2e", "client_payload": { "repository": "${{ github.repository }}" }}'
+          -d '{"event_type": "end e2e", "client_payload": { "repository": "${{ github.repository }}", "passed": false }}'
